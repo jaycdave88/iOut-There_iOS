@@ -16,6 +16,12 @@
 		366DE0E91B85ADCE00B89D7C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366DE0E71B85ADCE00B89D7C /* LaunchScreen.xib */; };
 		366DE0F51B85ADCE00B89D7C /* OutThereTestingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 366DE0F41B85ADCE00B89D7C /* OutThereTestingTests.m */; };
 		366DE0FF1B85AE6000B89D7C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366DE0FE1B85AE6000B89D7C /* MapKit.framework */; };
+		36C722571B877D43003C7291 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C7224E1B877CA5003C7291 /* libRestKit.a */; };
+		36C722591B877D53003C7291 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C722581B877D53003C7291 /* CFNetwork.framework */; };
+		36C7225B1B877D61003C7291 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C7225A1B877D61003C7291 /* CoreData.framework */; };
+		36C7225D1B877D6A003C7291 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C7225C1B877D6A003C7291 /* MobileCoreServices.framework */; };
+		36C7225F1B877D71003C7291 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C7225E1B877D71003C7291 /* Security.framework */; };
+		36C722611B877D7B003C7291 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C722601B877D7B003C7291 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +31,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 366DE0D11B85ADCE00B89D7C;
 			remoteInfo = OutThereTesting;
+		};
+		36C7224D1B877CA5003C7291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		36C7224F1B877CA5003C7291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		36C722511B877CA5003C7291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		36C722531B877CA5003C7291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		36C722551B877D30003C7291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -44,6 +85,13 @@
 		366DE0F31B85ADCE00B89D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		366DE0F41B85ADCE00B89D7C /* OutThereTestingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutThereTestingTests.m; sourceTree = "<group>"; };
 		366DE0FE1B85AE6000B89D7C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		36C722461B877CA4003C7291 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit2/RestKit.xcodeproj; sourceTree = "<group>"; };
+		36C722581B877D53003C7291 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		36C7225A1B877D61003C7291 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		36C7225C1B877D6A003C7291 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		36C7225E1B877D71003C7291 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		36C722601B877D7B003C7291 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		36C722621B877DD4003C7291 /* OutThereTesting-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OutThereTesting-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +99,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C722611B877D7B003C7291 /* SystemConfiguration.framework in Frameworks */,
+				36C7225F1B877D71003C7291 /* Security.framework in Frameworks */,
+				36C7225D1B877D6A003C7291 /* MobileCoreServices.framework in Frameworks */,
+				36C7225B1B877D61003C7291 /* CoreData.framework in Frameworks */,
+				36C722591B877D53003C7291 /* CFNetwork.framework in Frameworks */,
+				36C722571B877D43003C7291 /* libRestKit.a in Frameworks */,
 				366DE0FF1B85AE6000B89D7C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +122,12 @@
 		366DE0C91B85ADCE00B89D7C = {
 			isa = PBXGroup;
 			children = (
+				36C722601B877D7B003C7291 /* SystemConfiguration.framework */,
+				36C7225E1B877D71003C7291 /* Security.framework */,
+				36C7225C1B877D6A003C7291 /* MobileCoreServices.framework */,
+				36C7225A1B877D61003C7291 /* CoreData.framework */,
+				36C722581B877D53003C7291 /* CFNetwork.framework */,
+				36C722461B877CA4003C7291 /* RestKit.xcodeproj */,
 				366DE0FE1B85AE6000B89D7C /* MapKit.framework */,
 				366DE0D41B85ADCE00B89D7C /* OutThereTesting */,
 				366DE0F11B85ADCE00B89D7C /* OutThereTestingTests */,
@@ -105,6 +165,7 @@
 			children = (
 				366DE0D61B85ADCE00B89D7C /* Info.plist */,
 				366DE0D71B85ADCE00B89D7C /* main.m */,
+				36C722621B877DD4003C7291 /* OutThereTesting-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -126,6 +187,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		36C722471B877CA4003C7291 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				36C7224E1B877CA5003C7291 /* libRestKit.a */,
+				36C722501B877CA5003C7291 /* RestKitTests.xctest */,
+				36C722521B877CA5003C7291 /* RestKit.framework */,
+				36C722541B877CA5003C7291 /* RestKitFrameworkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,6 +212,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				36C722561B877D30003C7291 /* PBXTargetDependency */,
 			);
 			name = OutThereTesting;
 			productName = OutThereTesting;
@@ -193,6 +266,12 @@
 			mainGroup = 366DE0C91B85ADCE00B89D7C;
 			productRefGroup = 366DE0D31B85ADCE00B89D7C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 36C722471B877CA4003C7291 /* Products */;
+					ProjectRef = 36C722461B877CA4003C7291 /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				366DE0D11B85ADCE00B89D7C /* OutThereTesting */,
@@ -200,6 +279,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		36C7224E1B877CA5003C7291 /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = 36C7224D1B877CA5003C7291 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		36C722501B877CA5003C7291 /* RestKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.xctest;
+			remoteRef = 36C7224F1B877CA5003C7291 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		36C722521B877CA5003C7291 /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = 36C722511B877CA5003C7291 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		36C722541B877CA5003C7291 /* RestKitFrameworkTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.xctest;
+			remoteRef = 36C722531B877CA5003C7291 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		366DE0D01B85ADCE00B89D7C /* Resources */ = {
@@ -248,6 +358,11 @@
 			isa = PBXTargetDependency;
 			target = 366DE0D11B85ADCE00B89D7C /* OutThereTesting */;
 			targetProxy = 366DE0EF1B85ADCE00B89D7C /* PBXContainerItemProxy */;
+		};
+		36C722561B877D30003C7291 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 36C722551B877D30003C7291 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -355,9 +470,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "OutThereTesting/OutThereTesting-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = OutThereTesting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -366,9 +488,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "OutThereTesting/OutThereTesting-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = OutThereTesting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -426,6 +555,7 @@
 				366DE0FA1B85ADCE00B89D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		366DE0FB1B85ADCE00B89D7C /* Build configuration list for PBXNativeTarget "OutThereTestingTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +564,7 @@
 				366DE0FD1B85ADCE00B89D7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
