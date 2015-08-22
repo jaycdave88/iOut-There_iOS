@@ -16,19 +16,19 @@
 @implementation AppDelegate
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     return [self.instagram handleOpenURL:url];
 
 }
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     return [self.instagram handleOpenURL:url];
 }
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.instagram = [[Instagram alloc] initWithClientId:@"7a6451bfb40f4ea8a00a7b664d77549e" delegate:self];
+    self.instagram = [[Instagram alloc] initWithClientId:@"7a6451bfb40f4ea8a00a7b664d77549e" delegate:nil];
 
     return YES;
 }

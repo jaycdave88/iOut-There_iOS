@@ -9,28 +9,66 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 
+// Data Model Classes
+#import "IGMedia.h"
+#import "IGMediaResolution.h"
+
+#import "SearchResultsListViewController.h"
+
 @interface ViewController ()
-    @property (nonatomic, strong) NSMutableData * responceData;
+
+@property (nonatomic, strong) NSMutableArray* arrmSearchResults;
+
 @end
 
 @implementation ViewController
-@synthesize responceData;
+
+@synthesize arrmSearchResults;
+@synthesize searchBarGeoLocation;
+@synthesize mapViewInstagramPins;
+
+#pragma mark - View Life Cycle Methods
 
 - (void)viewDidLoad {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.searchBar.delegate = self;
-    self.myMap.delegate = self;
+
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    Instagram* instagramObject  = [appDelegate instagram];
+    NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
+    [instagramObject setAccessToken:accessToken];
+
+    self.title = NSLocalizedString(@"STR_APPLICATION_TITLE", nil);
 }
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    [super viewWillAppear:animated];
+    self.searchBarGeoLocation.delegate = self;
+    self.mapViewInstagramPins.delegate = self;
+}
+
+- (void)viewDidLayoutSubviews {
+    [self beautify];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    [super viewWillDisappear:animated];
+    self.searchBarGeoLocation.delegate = nil;
+    self.mapViewInstagramPins.delegate = nil;
+}
+
+#pragma mark - Search Bar Delegate Methods
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     NSLog(@"working");
     
-    [self.searchBar resignFirstResponder];
+    [self.searchBarGeoLocation resignFirstResponder];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
-    [geocoder geocodeAddressString:self.searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder geocodeAddressString:self.searchBarGeoLocation.text completionHandler:^(NSArray *placemarks, NSError *error) {
 
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         MKCoordinateRegion region;
@@ -41,25 +79,27 @@
         [annotation setCoordinate:newLocation];
 
 
-        NSLog(@"Lat of %@: %f",self.searchBar.text, newLocation.latitude);
-        NSLog(@"Long of %@: %f",self.searchBar.text, newLocation.longitude);
+        NSLog(@"Lat of %@: %f",self.searchBarGeoLocation.text, newLocation.latitude);
+        NSLog(@"Long of %@: %f",self.searchBarGeoLocation.text, newLocation.longitude);
 
         [self fetchNamedLocationFromInstagram:newLocation.latitude andLondgitude:newLocation.longitude];
 
-        [annotation setTitle:self.searchBar.text];
-        [self.myMap addAnnotation:annotation];
+        [annotation setTitle:self.searchBarGeoLocation.text];
+        [self.mapViewInstagramPins addAnnotation:annotation];
         
-        MKMapRect mr = [self.myMap visibleMapRect];
+        MKMapRect mr = [self.mapViewInstagramPins visibleMapRect];
         MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
+        
         mr.origin.x = pt.x - mr.size.width * 0.5;
         mr.origin.y = pt.y -mr.size.width * 0.25;
-        [self.myMap setVisibleMapRect:mr animated:YES];
+
+        [self.mapViewInstagramPins setVisibleMapRect:mr animated:YES];
     }];
 
     
 }
 
-#pragma mark - startInsagram
+#pragma mark - IBAction Methods
 
 - (IBAction)searchButton:(id)sender {
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -68,15 +108,20 @@
 
     appDelegate.instagram.sessionDelegate = self;
 
-    if ([appDelegate.instagram isSessionValid] == NO) {
-        [appDelegate.instagram authorize:nil]; // triggers the authenication process
+    if ([appDelegate.instagram isSessionValid]  == YES && ([self.arrmSearchResults count] > 0 ) ) {
+        SearchResultsListViewController* objVC = [self.storyboard instantiateViewControllerWithIdentifier:@"kSceneSearchResultsListViewController"];
+        [objVC updateSearchResults:[self.arrmSearchResults copy]];
+        [self.navigationController pushViewController:objVC animated:YES];
     }
-    else{
-
+    else {
+        // Launch for Authorization
+        [appDelegate.instagram authorize:nil]; // triggers the authenication process
     }
 }
 
--(void)igDidLogin{
+#pragma mark - Instagram Login Methods
+
+- (void)igDidLogin{
     NSLog(@"%s", __PRETTY_FUNCTION__);
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -84,23 +129,33 @@
     [userDefaults synchronize];
 }
 
--(void)igDidNotLogin:(BOOL)cancelled{
+- (void)igDidNotLogin:(BOOL)cancelled{
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
--(void)igDidLogout{
+- (void)igDidLogout{
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
--(void)igSessionInvalidated{
+- (void)igSessionInvalidated{
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-#pragma mark - IGRequestDelegate Methods
+#pragma mark - User Defined Methods
+
+- (void)beautify {
+    CGFloat width = CGRectGetWidth(mapViewInstagramPins.frame);
+    CGFloat height = CGRectGetHeight(mapViewInstagramPins.frame);
+    CGFloat cornerRadiusFactor =  (width > height ? height/2 : width/2);
+
+    [[mapViewInstagramPins layer] setCornerRadius:cornerRadiusFactor];
+    [[mapViewInstagramPins layer] setMasksToBounds:YES];
+
+
+}
 
 - (void)fetchNamedLocationFromInstagram:(double)latitude andLondgitude:(double)longitude{
 
-    self.responceData = [[NSMutableData alloc] init];
 
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     Instagram* instagramObject  = [appDelegate instagram];
@@ -118,59 +173,57 @@
     [instagramObject requestWithParams:[dictionaryForRequest mutableCopy] delegate:self];
 }
 
+#pragma mark - IGRequestDelegate Methods
+
 - (void)requestLoading:(IGRequest *)request{
 
 }
 
-/**
- * Called when the server responds and begins to send back data.
- */
 - (void)request:(IGRequest *)request didReceiveResponse:(NSURLResponse *)response{
 
 
 }
 
-/**
- * Called when an error prevents the request from completing successfully.
- */
 - (void)request:(IGRequest *)request didFailWithError:(NSError *)error{
 
 }
 
-/**
- * Called when a request returns and its response has been parsed into
- * an object.
- *
- * The resulting object may be a dictionary, an array, a string, or a number,
- * depending on thee format of the API response.
-
- */
 - (void)request:(IGRequest *)request didLoad:(id)result{
-    NSLog(@"%@", result );
-//
+
+//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"%@", jsonString );
+
+#ifdef DEBUG
+    NSLog(@"%s ",__PRETTY_FUNCTION__);
+#endif
+    if (arrmSearchResults == nil) {
+        self.arrmSearchResults = [[NSMutableArray alloc] init];
+    }
+
+    [self.arrmSearchResults removeAllObjects];
+
     if ([result isKindOfClass:[NSDictionary class]]) {
         // Pull out the Object for the key @c data
         NSArray* arrResults  =  [result valueForKey:@"data"];
-
-        //InstagramObject
-
-//        for (NSDictionary* object in arrResults) {
-//            // Every Object is a node here
-//            InstagramObject myObject = [[InstagramObject alloc] init:object];
-//
-//            [mutableArry addObject:]
+        for (NSDictionary* object in arrResults) {
+            // Every Object is a node here
+            IGMedia *myObject = [[IGMedia alloc] initWithJSONDictionary:object];
+            [self.arrmSearchResults addObject:myObject];
         }
-//
-//
-//
-//
-//    }
-//    else if ([result isKindOfClass:[NSArray class]]) {
-//
-//    }
-//    else {
-//        // Dead end
-//    }
+    }
+    else if ([result isKindOfClass:[NSArray class]]) {
+
+    }
+    else {
+        // Dead end
+    }
+    NSLog(@"Number of Search Results %ld" , [self.arrmSearchResults count]);
+
+    for (IGMedia* media in arrmSearchResults) {
+        IGMediaResolution* standardResolution = [media igMediaResolutionStandard];
+        NSLog(@"URL is %@", [standardResolution igmediaResURL]);
+    }
 }
 
 

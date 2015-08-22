@@ -12,9 +12,8 @@
 
 @interface ViewController : UIViewController <UISearchBarDelegate,MKMapViewDelegate,IGSessionDelegate,IGRequestDelegate>
 
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-
-@property (strong, nonatomic) IBOutlet MKMapView *myMap;
+@property (strong, nonatomic) IBOutlet UISearchBar  *searchBarGeoLocation;
+@property (strong, nonatomic) IBOutlet MKMapView    *mapViewInstagramPins;
 
 - (IBAction)searchButton:(id)sender;
 
