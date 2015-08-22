@@ -10,7 +10,7 @@
 
 
 static NSString* kDialogBaseURL         = @"https://instagram.com/";
-static NSString* kRestserverBaseURL     = @"https://api.instagram.com/v1/";
+static NSString* kRestserverBaseURL     = @"https://api.instagram.com/v1/media/";
 
 static NSString* kLogin                 = @"oauth/authorize";
 

@@ -75,15 +75,24 @@ NSString* const InstagramErrorDomain = @"instagramErrorDomain";
             }
             continue;
         }
-        
-        NSString* escaped_value = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
-                                                                                      NULL, /* allocator */
-                                                                                      (__bridge CFStringRef)[params objectForKey:key],
-                                                                                      NULL, /* charactersToLeaveUnescaped */
-                                                                                      (CFStringRef)@"!*'();:@&=$,/?%#[]",
-                                                                                      kCFStringEncodingUTF8);
-        
-        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
+
+        NSString* escaped_value = nil;
+        @try {
+            escaped_value = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                                            NULL, /* allocator */
+                                                                                                            (__bridge CFStringRef)[params objectForKey:key],
+                                                                                                            NULL, /* charactersToLeaveUnescaped */
+                                                                                                            (CFStringRef)@"!*'();:@&=$,/?%#[]",
+                                                                                                            kCFStringEncodingUTF8);
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@", exception.description);
+        }
+        @finally {
+            [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
+        }
+
+
     }
     NSString* query = [pairs componentsJoinedByString:@"&"];
     NSLog(@"URL: %@", [NSString stringWithFormat:@"%@%@%@", baseUrl, queryPrefix, query]);

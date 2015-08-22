@@ -105,8 +105,15 @@
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     Instagram* instagramObject  = [appDelegate instagram];
 
-    NSDictionary* dictionaryForRequest =  [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:latitude], @"lat",
-                                           [NSNumber numberWithDouble:longitude], @"lng",@"locations",@"method",nil];
+    // Search URL goes here
+
+    //https://api.instagram.com/v1/media/search?lat= 0.00&lng=0.00&access_token=0.00&callback=?
+
+
+    NSDictionary* dictionaryForRequest =  [NSDictionary dictionaryWithObjectsAndKeys:
+                                           [NSString stringWithFormat:@"%.2f",latitude], @"lat",
+                                           [NSString stringWithFormat:@"%.2f",longitude],@"lng",
+                                           @"search",@"method",nil];
 
     [instagramObject requestWithParams:[dictionaryForRequest mutableCopy] delegate:self];
 }
@@ -136,9 +143,34 @@
  *
  * The resulting object may be a dictionary, an array, a string, or a number,
  * depending on thee format of the API response.
+
  */
 - (void)request:(IGRequest *)request didLoad:(id)result{
     NSLog(@"%@", result );
+
+//    if ([result isKindOfClass:[NSDictionary class]]) {
+//        // Pull out the Object for the key @c data
+//
+//        NSArray* arrResults  =  [result valueForKey:@"data"];
+//
+//        //InstagramObject
+//        for (NSDictionary* object in arrResults) {
+//            // Every Object is a node here
+//            InstagramObject myObject = [[InstagramObject alloc] initWithJSONDoict:object];
+//
+//            [mutableArry addObject:]
+//        }
+//
+//
+//
+//
+//    }
+//    else if ([result isKindOfClass:[NSArray class]]) {
+//
+//    }
+//    else {
+//        // Dead end
+//    }
 }
 
 
