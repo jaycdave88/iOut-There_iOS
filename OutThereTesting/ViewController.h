@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "Instagram.h"
 
-@interface ViewController : UIViewController <UISearchBarDelegate,MKMapViewDelegate,IGSessionDelegate>
+@interface ViewController : UIViewController <UISearchBarDelegate,MKMapViewDelegate,IGSessionDelegate,IGRequestDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 

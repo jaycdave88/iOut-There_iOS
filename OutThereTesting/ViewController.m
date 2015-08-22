@@ -10,10 +10,11 @@
 #import "AppDelegate.h"
 
 @interface ViewController ()
-
+    @property (nonatomic, strong) NSMutableData * responceData;
 @end
 
 @implementation ViewController
+@synthesize responceData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +31,7 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
     [geocoder geocodeAddressString:self.searchBar.text completionHandler:^(NSArray *placemarks, NSError *error) {
+
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         MKCoordinateRegion region;
         CLLocationCoordinate2D newLocation = [placemark.location coordinate];
@@ -42,6 +44,8 @@
         NSLog(@"Lat of %@: %f",self.searchBar.text, newLocation.latitude);
         NSLog(@"Long of %@: %f",self.searchBar.text, newLocation.longitude);
 
+        [self fetchNamedLocationFromInstagram:newLocation.latitude andLondgitude:newLocation.longitude];
+
         [annotation setTitle:self.searchBar.text];
         [self.myMap addAnnotation:annotation];
         
@@ -51,6 +55,7 @@
         mr.origin.y = pt.y -mr.size.width * 0.25;
         [self.myMap setVisibleMapRect:mr animated:YES];
     }];
+
     
 }
 
@@ -89,6 +94,51 @@
 
 -(void)igSessionInvalidated{
     NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark - IGRequestDelegate Methods
+
+- (void)fetchNamedLocationFromInstagram:(double)latitude andLondgitude:(double)longitude{
+
+    self.responceData = [[NSMutableData alloc] init];
+
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    Instagram* instagramObject  = [appDelegate instagram];
+
+    NSDictionary* dictionaryForRequest =  [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:latitude], @"lat",
+                                           [NSNumber numberWithDouble:longitude], @"lng",@"locations",@"method",nil];
+
+    [instagramObject requestWithParams:[dictionaryForRequest mutableCopy] delegate:self];
+}
+
+- (void)requestLoading:(IGRequest *)request{
+
+}
+
+/**
+ * Called when the server responds and begins to send back data.
+ */
+- (void)request:(IGRequest *)request didReceiveResponse:(NSURLResponse *)response{
+
+
+}
+
+/**
+ * Called when an error prevents the request from completing successfully.
+ */
+- (void)request:(IGRequest *)request didFailWithError:(NSError *)error{
+
+}
+
+/**
+ * Called when a request returns and its response has been parsed into
+ * an object.
+ *
+ * The resulting object may be a dictionary, an array, a string, or a number,
+ * depending on thee format of the API response.
+ */
+- (void)request:(IGRequest *)request didLoad:(id)result{
+    NSLog(@"%@", result );
 }
 
 
