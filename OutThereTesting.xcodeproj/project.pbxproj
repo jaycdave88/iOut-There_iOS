@@ -16,6 +16,9 @@
 		366DE0E91B85ADCE00B89D7C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366DE0E71B85ADCE00B89D7C /* LaunchScreen.xib */; };
 		366DE0F51B85ADCE00B89D7C /* OutThereTestingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 366DE0F41B85ADCE00B89D7C /* OutThereTestingTests.m */; };
 		366DE0FF1B85AE6000B89D7C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366DE0FE1B85AE6000B89D7C /* MapKit.framework */; };
+		36AB39AB1B87ECC500852C9B /* IGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AB39A81B87ECC500852C9B /* IGRequest.m */; };
+		36AB39AC1B87ECC500852C9B /* Instagram.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AB39AA1B87ECC500852C9B /* Instagram.m */; };
+		36AB39AF1B87EDDC00852C9B /* InstagramManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AB39AE1B87EDDC00852C9B /* InstagramManager.m */; };
 		A4F4058751C2347F99F8F269 /* libPods-OutThereTesting.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9546198A3C012940EB07BAB2 /* libPods-OutThereTesting.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,13 @@
 		366DE0F31B85ADCE00B89D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		366DE0F41B85ADCE00B89D7C /* OutThereTestingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutThereTestingTests.m; sourceTree = "<group>"; };
 		366DE0FE1B85AE6000B89D7C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		36AB39A61B87ECC500852C9B /* IGConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGConnect.h; sourceTree = "<group>"; };
+		36AB39A71B87ECC500852C9B /* IGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRequest.h; sourceTree = "<group>"; };
+		36AB39A81B87ECC500852C9B /* IGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRequest.m; sourceTree = "<group>"; };
+		36AB39A91B87ECC500852C9B /* Instagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instagram.h; sourceTree = "<group>"; };
+		36AB39AA1B87ECC500852C9B /* Instagram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instagram.m; sourceTree = "<group>"; };
+		36AB39AD1B87EDDC00852C9B /* InstagramManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramManager.h; sourceTree = "<group>"; };
+		36AB39AE1B87EDDC00852C9B /* InstagramManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramManager.m; sourceTree = "<group>"; };
 		90CC402152D6703074F1C765 /* Pods-OutThereTesting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OutThereTesting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OutThereTesting/Pods-OutThereTesting.debug.xcconfig"; sourceTree = "<group>"; };
 		9546198A3C012940EB07BAB2 /* libPods-OutThereTesting.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OutThereTesting.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,10 +108,13 @@
 				366DE0DA1B85ADCE00B89D7C /* AppDelegate.m */,
 				366DE0DF1B85ADCE00B89D7C /* ViewController.h */,
 				366DE0E01B85ADCE00B89D7C /* ViewController.m */,
+				36AB39AD1B87EDDC00852C9B /* InstagramManager.h */,
+				36AB39AE1B87EDDC00852C9B /* InstagramManager.m */,
 				366DE0E21B85ADCE00B89D7C /* Main.storyboard */,
 				366DE0E51B85ADCE00B89D7C /* Images.xcassets */,
 				366DE0E71B85ADCE00B89D7C /* LaunchScreen.xib */,
 				366DE0DC1B85ADCE00B89D7C /* OutThereTesting.xcdatamodeld */,
+				36AB39B01B87EE0300852C9B /* IgKit */,
 				366DE0D51B85ADCE00B89D7C /* Supporting Files */,
 			);
 			path = OutThereTesting;
@@ -131,6 +144,18 @@
 				366DE0F31B85ADCE00B89D7C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36AB39B01B87EE0300852C9B /* IgKit */ = {
+			isa = PBXGroup;
+			children = (
+				36AB39A61B87ECC500852C9B /* IGConnect.h */,
+				36AB39A71B87ECC500852C9B /* IGRequest.h */,
+				36AB39A81B87ECC500852C9B /* IGRequest.m */,
+				36AB39A91B87ECC500852C9B /* Instagram.h */,
+				36AB39AA1B87ECC500852C9B /* Instagram.m */,
+			);
+			name = IgKit;
 			sourceTree = "<group>";
 		};
 		38678FFE4305879D702DD7C4 /* Frameworks */ = {
@@ -286,8 +311,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				366DE0DB1B85ADCE00B89D7C /* AppDelegate.m in Sources */,
+				36AB39AB1B87ECC500852C9B /* IGRequest.m in Sources */,
 				366DE0DE1B85ADCE00B89D7C /* OutThereTesting.xcdatamodeld in Sources */,
+				36AB39AF1B87EDDC00852C9B /* InstagramManager.m in Sources */,
 				366DE0E11B85ADCE00B89D7C /* ViewController.m in Sources */,
+				36AB39AC1B87ECC500852C9B /* Instagram.m in Sources */,
 				366DE0D81B85ADCE00B89D7C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

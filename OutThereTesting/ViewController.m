@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -52,5 +53,43 @@
     }];
     
 }
+
+#pragma mark - startInsagram
+
+- (IBAction)searchButton:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+
+    appDelegate.instagram.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+
+    appDelegate.instagram.sessionDelegate = self;
+
+    if ([appDelegate.instagram isSessionValid] == NO) {
+        [appDelegate.instagram authorize:nil]; // triggers the authenication process
+    }
+    else{
+
+    }
+}
+
+-(void)igDidLogin{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:appDelegate.instagram.accessToken forKey:@"accessToken"];
+    [userDefaults synchronize];
+}
+
+-(void)igDidNotLogin:(BOOL)cancelled{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+-(void)igDidLogout{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+-(void)igSessionInvalidated{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 
 @end

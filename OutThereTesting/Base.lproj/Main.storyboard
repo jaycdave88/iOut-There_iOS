@@ -21,19 +21,34 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gqf-nU-3QD">
-                                <rect key="frame" x="0.0" y="96" width="600" height="407"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="407"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="407" id="Rpd-0Z-FrZ"/>
                                 </constraints>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnu-Q6-wK6">
+                                <rect key="frame" x="261" y="479" width="79" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="C3I-ZH-gBg"/>
+                                    <constraint firstAttribute="width" constant="79" id="KvX-jA-uZ5"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7WI-cZ-kZh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="qnu-Q6-wK6" secondAttribute="centerX" id="By2-KZ-W17"/>
                             <constraint firstItem="gqf-nU-3QD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Iea-Eu-Xhs"/>
+                            <constraint firstItem="qnu-Q6-wK6" firstAttribute="top" secondItem="gqf-nU-3QD" secondAttribute="bottom" constant="8" id="Mdo-Rh-GeQ"/>
                             <constraint firstAttribute="centerX" secondItem="gqf-nU-3QD" secondAttribute="centerX" id="Mpw-U3-J7m"/>
                             <constraint firstItem="fFG-KC-Hgl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="PVl-wA-jeo"/>
                             <constraint firstAttribute="trailing" secondItem="fFG-KC-Hgl" secondAttribute="trailing" id="Vcd-cD-g8U"/>
-                            <constraint firstAttribute="centerY" secondItem="gqf-nU-3QD" secondAttribute="centerY" id="peZ-h0-Yg4"/>
+                            <constraint firstAttribute="centerY" secondItem="gqf-nU-3QD" secondAttribute="centerY" constant="32" id="peZ-h0-Yg4"/>
                             <constraint firstItem="fFG-KC-Hgl" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="r6w-SU-ScN"/>
                             <constraint firstAttribute="trailing" secondItem="gqf-nU-3QD" secondAttribute="trailing" id="tMF-t0-sMn"/>
                         </constraints>
