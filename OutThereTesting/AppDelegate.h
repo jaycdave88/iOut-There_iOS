@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Instagram.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
+@property (strong,nonatomic) Instagram *instagram;
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

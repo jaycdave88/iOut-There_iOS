@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Instagram.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,21 @@
 
 @implementation AppDelegate
 
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
+    return [self.instagram handleOpenURL:url];
+
+}
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
+    return [self.instagram handleOpenURL:url];
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.instagram = [[Instagram alloc] initWithClientId:@"7a6451bfb40f4ea8a00a7b664d77549e" delegate:nil];
+
     return YES;
 }
 
@@ -70,9 +83,9 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
+
     // Create the coordinator and store
-    
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"OutThereTesting.sqlite"];
     NSError *error = nil;
@@ -89,7 +102,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
+
     return _persistentStoreCoordinator;
 }
 
@@ -99,7 +112,7 @@
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         return nil;
