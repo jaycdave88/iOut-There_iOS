@@ -147,19 +147,19 @@
  */
 - (void)request:(IGRequest *)request didLoad:(id)result{
     NSLog(@"%@", result );
+//
+    if ([result isKindOfClass:[NSDictionary class]]) {
+        // Pull out the Object for the key @c data
+        NSArray* arrResults  =  [result valueForKey:@"data"];
 
-//    if ([result isKindOfClass:[NSDictionary class]]) {
-//        // Pull out the Object for the key @c data
-//
-//        NSArray* arrResults  =  [result valueForKey:@"data"];
-//
-//        //InstagramObject
+        //InstagramObject
+
 //        for (NSDictionary* object in arrResults) {
 //            // Every Object is a node here
-//            InstagramObject myObject = [[InstagramObject alloc] initWithJSONDoict:object];
+//            InstagramObject myObject = [[InstagramObject alloc] init:object];
 //
 //            [mutableArry addObject:]
-//        }
+        }
 //
 //
 //
