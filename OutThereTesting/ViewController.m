@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) NSMutableArray* arrmSearchResults;
 
+@property (nonatomic  ,assign) BOOL authorizationCompleted;
+
 @end
 
 @implementation ViewController
@@ -26,6 +28,7 @@
 @synthesize arrmSearchResults;
 @synthesize searchBarGeoLocation;
 @synthesize mapViewInstagramPins;
+@synthesize btnLoadResults;
 
 #pragma mark - View Life Cycle Methods
 
@@ -33,12 +36,8 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [super viewDidLoad];
 
-    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    Instagram* instagramObject  = [appDelegate instagram];
-    NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
-    [instagramObject setAccessToken:accessToken];
-
-    self.title = NSLocalizedString(@"STR_APPLICATION_TITLE", nil);
+    [searchBarGeoLocation setPlaceholder:@"Search locations/places/landmarks"];
+    self.title = NSLocalizedString(@"STR_APPLICATION_TITLE",nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,9 +45,24 @@
     [super viewWillAppear:animated];
     self.searchBarGeoLocation.delegate = self;
     self.mapViewInstagramPins.delegate = self;
+
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    Instagram* instagramObject  = [appDelegate instagram];
+    NSString* accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"accessToken"];
+    if (accessToken != nil) {
+        [instagramObject setAccessToken:accessToken];
+        _authorizationCompleted = YES;
+        [btnLoadResults setTitle:@"Load Results" forState:UIControlStateNormal];
+    }
+    else {
+        _authorizationCompleted = NO;
+        [btnLoadResults setTitle:@"Authorize" forState:UIControlStateNormal];
+    }
+
 }
 
 - (void)viewDidLayoutSubviews {
+   // NSLog(@"%@",self.traitCollection);
     [self beautify];
 }
 
@@ -62,19 +76,23 @@
 #pragma mark - Search Bar Delegate Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    NSLog(@"working");
-    
+
     [self.searchBarGeoLocation resignFirstResponder];
-    
+
+
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    
+
     [geocoder geocodeAddressString:self.searchBarGeoLocation.text completionHandler:^(NSArray *placemarks, NSError *error) {
 
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         MKCoordinateRegion region;
         CLLocationCoordinate2D newLocation = [placemark.location coordinate];
         region.center = [(CLCircularRegion *)placemark.region center];
-        
+
+        if ([[mapViewInstagramPins annotations] count] > 0) {
+            [mapViewInstagramPins removeAnnotations:[mapViewInstagramPins annotations]];
+        }
+
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         [annotation setCoordinate:newLocation];
 
@@ -86,38 +104,56 @@
 
         [annotation setTitle:self.searchBarGeoLocation.text];
         [self.mapViewInstagramPins addAnnotation:annotation];
-        
+
         MKMapRect mr = [self.mapViewInstagramPins visibleMapRect];
         MKMapPoint pt = MKMapPointForCoordinate([annotation coordinate]);
-        
+
         mr.origin.x = pt.x - mr.size.width * 0.5;
         mr.origin.y = pt.y -mr.size.width * 0.25;
 
         [self.mapViewInstagramPins setVisibleMapRect:mr animated:YES];
     }];
 
-    
+
+
+
 }
 
 #pragma mark - IBAction Methods
 
-- (IBAction)searchButton:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+- (IBAction)btnLoadResultsPressed:(id)sender {
 
-    appDelegate.instagram.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    if (_authorizationCompleted) {
 
-    appDelegate.instagram.sessionDelegate = self;
+        if ([self.arrmSearchResults count] > 0 ) {
+            SearchResultsListViewController* objVC = [self.storyboard instantiateViewControllerWithIdentifier:@"kSceneSearchResultsListViewController"];
+            [objVC updateSearchResults:[self.arrmSearchResults copy]];
+            [self.navigationController pushViewController:objVC animated:YES];
+        }
+        else {
+            UIAlertController* errorAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"STR_APPLICATION_TITLE", nil)
+                                                                                          message:@"No results weere found for specified keyword/Place" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.searchBarGeoLocation setText:nil];
+                    [self.searchBarGeoLocation becomeFirstResponder];
+                });
+            }];
+            [errorAlertController addAction:okAction];
+            [self presentViewController:errorAlertController animated:YES completion:NULL];
 
-    if ([appDelegate.instagram isSessionValid]  == YES && ([self.arrmSearchResults count] > 0 ) ) {
-        SearchResultsListViewController* objVC = [self.storyboard instantiateViewControllerWithIdentifier:@"kSceneSearchResultsListViewController"];
-        [objVC updateSearchResults:[self.arrmSearchResults copy]];
-        [self.navigationController pushViewController:objVC animated:YES];
+        }
     }
     else {
         // Launch for Authorization
-        [appDelegate.instagram authorize:nil]; // triggers the authenication process
+        AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        appDelegate.instagram.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+        appDelegate.instagram.sessionDelegate = self;
+        [appDelegate.instagram authorize:nil];
     }
 }
+
+
 
 #pragma mark - Instagram Login Methods
 
@@ -127,6 +163,15 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:appDelegate.instagram.accessToken forKey:@"accessToken"];
     [userDefaults synchronize];
+
+    if (appDelegate.instagram.accessToken != nil) {
+        _authorizationCompleted = YES;
+        [btnLoadResults setTitle:@"Load Results" forState:UIControlStateNormal];
+    }
+    else {
+        _authorizationCompleted = NO;
+        [btnLoadResults setTitle:@"Authorize" forState:UIControlStateNormal];
+    }
 }
 
 - (void)igDidNotLogin:(BOOL)cancelled{
@@ -144,14 +189,23 @@
 #pragma mark - User Defined Methods
 
 - (void)beautify {
-    CGFloat width = CGRectGetWidth(mapViewInstagramPins.frame);
-    CGFloat height = CGRectGetHeight(mapViewInstagramPins.frame);
-    CGFloat cornerRadiusFactor =  (width > height ? height/2 : width/2);
-
-    [[mapViewInstagramPins layer] setCornerRadius:cornerRadiusFactor];
-    [[mapViewInstagramPins layer] setMasksToBounds:YES];
+    [[self.navigationController navigationBar] setBarTintColor:[UIColor redColor]];
 
 
+    //[self.searchBarGeoLocation setTintColor:[UIColor redColor]];
+
+    [self.searchBarGeoLocation setSearchBarStyle:UISearchBarStyleMinimal];
+    //[self.searchBarGeoLocation setBackgroundColor:[UIColor redColor]];
+
+    //    CGFloat width = CGRectGetWidth(mapViewInstagramPins.frame);
+//    CGFloat height = CGRectGetHeight(mapViewInstagramPins.frame);
+//    CGFloat cornerRadiusFactor =  (width > height ? height/2 : width/2);
+//
+//    [[mapViewInstagramPins layer] setCornerRadius:cornerRadiusFactor];
+//    [[mapViewInstagramPins layer] setMasksToBounds:YES];
+
+    self.mapViewInstagramPins.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.mapViewInstagramPins.layer.borderWidth = 3.0f;
 }
 
 - (void)fetchNamedLocationFromInstagram:(double)latitude andLondgitude:(double)longitude{
@@ -190,9 +244,9 @@
 
 - (void)request:(IGRequest *)request didLoad:(id)result{
 
-//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"%@", jsonString );
+    //    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];
+    //    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //    NSLog(@"%@", jsonString );
 
 #ifdef DEBUG
     NSLog(@"%s ",__PRETTY_FUNCTION__);
@@ -218,11 +272,11 @@
     else {
         // Dead end
     }
-    NSLog(@"Number of Search Results %ld" , [self.arrmSearchResults count]);
+    NSLog(@"Number of Search Results %ld" , (unsigned long)[self.arrmSearchResults count]);
 
     for (IGMedia* media in arrmSearchResults) {
         IGMediaResolution* standardResolution = [media igMediaResolutionStandard];
-        NSLog(@"URL is %@", [standardResolution igmediaResURL]);
+        //        NSLog(@"URL is %@", [standardResolution igmediaResURL]);
     }
 }
 

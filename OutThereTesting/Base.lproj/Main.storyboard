@@ -36,19 +36,16 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gqf-nU-3QD">
-                                <rect key="frame" x="20" y="116" width="560" height="399"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="399" id="Rpd-0Z-FrZ"/>
-                                </constraints>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybrid" translatesAutoresizingMaskIntoConstraints="NO" id="gqf-nU-3QD">
+                                <rect key="frame" x="8" y="116" width="584" height="426"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnu-Q6-wK6">
-                                <rect key="frame" x="256" y="523" width="88" height="30"/>
+                                <rect key="frame" x="245" y="550" width="110" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <rect key="contentStretch" x="0.10000000000000002" y="0.0" width="0.79999999999999982" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C3I-ZH-gBg"/>
-                                    <constraint firstAttribute="width" constant="88" id="KvX-jA-uZ5"/>
+                                    <constraint firstAttribute="width" constant="110" id="VS2-6q-ySo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,24 +60,26 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="searchButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7WI-cZ-kZh"/>
+                                    <action selector="btnLoadResultsPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vFH-KK-0bD"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qnu-Q6-wK6" secondAttribute="bottom" constant="20" id="7PG-R7-52Y"/>
                             <constraint firstAttribute="centerX" secondItem="qnu-Q6-wK6" secondAttribute="centerX" id="By2-KZ-W17"/>
                             <constraint firstItem="fFG-KC-Hgl" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="J7n-qg-kUY"/>
-                            <constraint firstItem="qnu-Q6-wK6" firstAttribute="top" secondItem="gqf-nU-3QD" secondAttribute="bottom" constant="8" id="Mdo-Rh-GeQ"/>
                             <constraint firstAttribute="centerX" secondItem="gqf-nU-3QD" secondAttribute="centerX" id="Mpw-U3-J7m"/>
                             <constraint firstItem="fFG-KC-Hgl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="PVl-wA-jeo"/>
                             <constraint firstItem="gqf-nU-3QD" firstAttribute="top" secondItem="fFG-KC-Hgl" secondAttribute="bottom" constant="8" id="UUJ-tk-OPm"/>
                             <constraint firstAttribute="trailing" secondItem="fFG-KC-Hgl" secondAttribute="trailing" id="Vcd-cD-g8U"/>
-                            <constraint firstAttribute="trailing" secondItem="gqf-nU-3QD" secondAttribute="trailing" constant="20" id="tMF-t0-sMn"/>
+                            <constraint firstItem="qnu-Q6-wK6" firstAttribute="top" secondItem="gqf-nU-3QD" secondAttribute="bottom" constant="8" id="poh-eD-wV9"/>
+                            <constraint firstAttribute="trailing" secondItem="gqf-nU-3QD" secondAttribute="trailing" constant="8" id="tMF-t0-sMn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hho-I6-50J"/>
                     <connections>
+                        <outlet property="btnLoadResults" destination="qnu-Q6-wK6" id="jzq-nb-JL9"/>
                         <outlet property="mapViewInstagramPins" destination="gqf-nU-3QD" id="siB-Wb-dgJ"/>
                         <outlet property="searchBarGeoLocation" destination="fFG-KC-Hgl" id="Yxh-ME-tBG"/>
                     </connections>
