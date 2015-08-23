@@ -40,12 +40,12 @@
                                 <rect key="frame" x="8" y="116" width="584" height="426"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnu-Q6-wK6">
-                                <rect key="frame" x="245" y="550" width="110" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="240" y="550" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.20784313725490194" green="0.40000000000000002" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                                 <rect key="contentStretch" x="0.10000000000000002" y="0.0" width="0.79999999999999982" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C3I-ZH-gBg"/>
-                                    <constraint firstAttribute="width" constant="110" id="VS2-6q-ySo"/>
+                                    <constraint firstAttribute="width" constant="120" id="VS2-6q-ySo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

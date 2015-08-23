@@ -30,18 +30,31 @@
 @synthesize mapViewInstagramPins;
 @synthesize btnLoadResults;
 
+
 #pragma mark - View Life Cycle Methods
 
 - (void)viewDidLoad {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     [super viewDidLoad];
-
-    [searchBarGeoLocation setPlaceholder:@"Search locations/places/landmarks"];
+    [searchBarGeoLocation setPlaceholder:@"Search Locations/Places/Landmarks"];
     self.title = NSLocalizedString(@"STR_APPLICATION_TITLE",nil);
 }
+//start dissmiss keyboard
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.searchBarGeoLocation resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField) {
+        [textField resignFirstResponder];
+    }
+    return NO;
+}
+//end dissmiss keyboard
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     [super viewWillAppear:animated];
     self.searchBarGeoLocation.delegate = self;
     self.mapViewInstagramPins.delegate = self;
@@ -67,7 +80,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
+//    NSLog(@"%s",__PRETTY_FUNCTION__);
     [super viewWillDisappear:animated];
     self.searchBarGeoLocation.delegate = nil;
     self.mapViewInstagramPins.delegate = nil;
@@ -132,7 +145,7 @@
         }
         else {
             UIAlertController* errorAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"STR_APPLICATION_TITLE", nil)
-                                                                                          message:@"No results weere found for specified keyword/Place" preferredStyle:UIAlertControllerStyleAlert];
+                                                                                          message:@"Oops! No results were found! Please make sure you enter a valid Location/Place/Landmarks" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.searchBarGeoLocation setText:nil];
@@ -189,20 +202,22 @@
 #pragma mark - User Defined Methods
 
 - (void)beautify {
-    [[self.navigationController navigationBar] setBarTintColor:[UIColor redColor]];
-
-
+    [[self.navigationController navigationBar] setBarTintColor:[UIColor colorWithRed:(16/225.0) green:(67/225.0) blue:(139/225.0) alpha:1.0]]; //changes the background color of the nav bar
     //[self.searchBarGeoLocation setTintColor:[UIColor redColor]];
-
-    [self.searchBarGeoLocation setSearchBarStyle:UISearchBarStyleMinimal];
+    [self.searchBarGeoLocation setSearchBarStyle:UISearchBarStyleMinimal]; // shrinks the searchbar to remove more padding
     //[self.searchBarGeoLocation setBackgroundColor:[UIColor redColor]];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]}; // change text color to white
 
-    //    CGFloat width = CGRectGetWidth(mapViewInstagramPins.frame);
+
+//    Round MapKit
+
+//    CGFloat width = CGRectGetWidth(mapViewInstagramPins.frame);
 //    CGFloat height = CGRectGetHeight(mapViewInstagramPins.frame);
 //    CGFloat cornerRadiusFactor =  (width > height ? height/2 : width/2);
 //
 //    [[mapViewInstagramPins layer] setCornerRadius:cornerRadiusFactor];
 //    [[mapViewInstagramPins layer] setMasksToBounds:YES];
+// end round Mapkit
 
     self.mapViewInstagramPins.layer.borderColor = [[UIColor grayColor] CGColor];
     self.mapViewInstagramPins.layer.borderWidth = 3.0f;
@@ -235,7 +250,6 @@
 
 - (void)request:(IGRequest *)request didReceiveResponse:(NSURLResponse *)response{
 
-
 }
 
 - (void)request:(IGRequest *)request didFailWithError:(NSError *)error{
@@ -248,9 +262,9 @@
     //    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     //    NSLog(@"%@", jsonString );
 
-#ifdef DEBUG
-    NSLog(@"%s ",__PRETTY_FUNCTION__);
-#endif
+//#ifdef DEBUG
+//    NSLog(@"%s ",__PRETTY_FUNCTION__);
+//#endif
     if (arrmSearchResults == nil) {
         self.arrmSearchResults = [[NSMutableArray alloc] init];
     }
@@ -272,7 +286,7 @@
     else {
         // Dead end
     }
-    NSLog(@"Number of Search Results %ld" , (unsigned long)[self.arrmSearchResults count]);
+//    NSLog(@"Number of Search Results %ld" , (unsigned long)[self.arrmSearchResults count]);
 
     for (IGMedia* media in arrmSearchResults) {
         IGMediaResolution* standardResolution = [media igMediaResolutionStandard];
