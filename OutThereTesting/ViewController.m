@@ -147,8 +147,8 @@
         }
         else {
             UIAlertController* errorAlertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"STR_APPLICATION_TITLE", nil)
-                                                                                          message:@"Oops! No results were found! Please make sure you enter a valid Location/Place/Landmarks" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                                                                          message:@"Oops! No results were found! Please make sure you enter a valid Location/Place/Landmark(s)" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.searchBarGeoLocation setText:nil];
                     [self.searchBarGeoLocation becomeFirstResponder];
@@ -209,6 +209,9 @@
     [self.searchBarGeoLocation setSearchBarStyle:UISearchBarStyleMinimal]; // shrinks the searchbar to remove more padding
     //[self.searchBarGeoLocation setBackgroundColor:[UIColor redColor]];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]}; // change text color to white
+
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
 
 //    Round MapKit
 
