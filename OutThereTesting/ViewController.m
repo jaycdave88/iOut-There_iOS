@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
 //    NSLog(@"%s",__PRETTY_FUNCTION__);
+
     [super viewDidLoad];
     [searchBarGeoLocation setPlaceholder:@"Search Locations/Places/Landmarks"];
     self.title = NSLocalizedString(@"STR_APPLICATION_TITLE",nil);
@@ -55,6 +56,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
 //    NSLog(@"%s",__PRETTY_FUNCTION__);
+
     [super viewWillAppear:animated];
     self.searchBarGeoLocation.delegate = self;
     self.mapViewInstagramPins.delegate = self;
@@ -202,12 +204,11 @@
 #pragma mark - User Defined Methods
 
 - (void)beautify {
-    [[self.navigationController navigationBar] setBarTintColor:[UIColor colorWithRed:(16/225.0) green:(67/225.0) blue:(139/225.0) alpha:1.0]]; //changes the background color of the nav bar
+    [[self.navigationController navigationBar] setBarTintColor:[UIColor colorWithRed:(56/225.0) green:(101/225.0) blue:(137/225.0) alpha:1.0]]; //changes the background color of the nav bar
     //[self.searchBarGeoLocation setTintColor:[UIColor redColor]];
     [self.searchBarGeoLocation setSearchBarStyle:UISearchBarStyleMinimal]; // shrinks the searchbar to remove more padding
     //[self.searchBarGeoLocation setBackgroundColor:[UIColor redColor]];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]}; // change text color to white
-
 
 //    Round MapKit
 
