@@ -1,5 +1,5 @@
-###Out-There v2
+##Out-There
+* An iOS App built in Objective-C 
+* Will allow anyone to pick a location anywhere in the world and pull photos from Instagram's API
 
-- Playing around with new SDKs and a new layout possibly removing pervious "Out-There"
-
-> Jay C. Davé
+>Jay C. Davé
