@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "366DE0D11B85ADCE00B89D7C"
-               BuildableName = "OutThereTesting.app"
-               BlueprintName = "OutThereTesting"
-               ReferencedContainer = "container:OutThereTesting.xcodeproj">
+               BuildableName = "iOut-There.app"
+               BlueprintName = "iOut-There"
+               ReferencedContainer = "container:iOut-There.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "366DE0ED1B85ADCE00B89D7C"
-               BuildableName = "OutThereTestingTests.xctest"
-               BlueprintName = "OutThereTestingTests"
-               ReferencedContainer = "container:OutThereTesting.xcodeproj">
+               BuildableName = "iOut-ThereTests.xctest"
+               BlueprintName = "iOut-ThereTests"
+               ReferencedContainer = "container:iOut-There.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "366DE0ED1B85ADCE00B89D7C"
-               BuildableName = "OutThereTestingTests.xctest"
-               BlueprintName = "OutThereTestingTests"
-               ReferencedContainer = "container:OutThereTesting.xcodeproj">
+               BuildableName = "iOut-ThereTests.xctest"
+               BlueprintName = "iOut-ThereTests"
+               ReferencedContainer = "container:iOut-There.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "366DE0D11B85ADCE00B89D7C"
-            BuildableName = "OutThereTesting.app"
-            BlueprintName = "OutThereTesting"
-            ReferencedContainer = "container:OutThereTesting.xcodeproj">
+            BuildableName = "iOut-There.app"
+            BlueprintName = "iOut-There"
+            ReferencedContainer = "container:iOut-There.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "366DE0D11B85ADCE00B89D7C"
-            BuildableName = "OutThereTesting.app"
-            BlueprintName = "OutThereTesting"
-            ReferencedContainer = "container:OutThereTesting.xcodeproj">
+            BuildableName = "iOut-There.app"
+            BlueprintName = "iOut-There"
+            ReferencedContainer = "container:iOut-There.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -101,9 +101,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "366DE0D11B85ADCE00B89D7C"
-            BuildableName = "OutThereTesting.app"
-            BlueprintName = "OutThereTesting"
-            ReferencedContainer = "container:OutThereTesting.xcodeproj">
+            BuildableName = "iOut-There.app"
+            BlueprintName = "iOut-There"
+            ReferencedContainer = "container:iOut-There.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

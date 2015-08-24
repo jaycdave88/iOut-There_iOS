@@ -28,6 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     self.instagram = [[Instagram alloc] initWithClientId:@"7a6451bfb40f4ea8a00a7b664d77549e" delegate:nil];
 
     return YES;

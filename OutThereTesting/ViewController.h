@@ -14,8 +14,9 @@
 
 @property (strong, nonatomic) IBOutlet UISearchBar  *searchBarGeoLocation;
 @property (strong, nonatomic) IBOutlet MKMapView    *mapViewInstagramPins;
+@property (strong, nonatomic) IBOutlet UIButton     *btnLoadResults;
 
-- (IBAction)searchButton:(id)sender;
+- (IBAction)btnLoadResultsPressed:(id)sender;
 
 extern NSInteger latitude;
 extern NSInteger longitude;
